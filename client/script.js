@@ -1,6 +1,6 @@
 let selected = [];
 let allColleges = [];
-fetch("http://localhost:5000/colleges")
+fetch("https://college-comparison.onrender.com/colleges")
   .then(res => res.json())
   .then(data => {
     allColleges = data;
