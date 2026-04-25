@@ -141,7 +141,7 @@ college-comparison-platform/
 ### 1️⃣ Clone the repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/college-comparison-platform.git
+git clone https://github.com/varsha-thiyagarajan/College_comparison.git
 ```
 
 ### 2️⃣ Navigate to backend
@@ -176,13 +176,19 @@ in your browser
 
 ## 📸 Screenshots
 
-> Add these screenshots for best impact:
+
 
 * 🏠 Home Page
-* ⚖️ Comparison Table
-* 📊 ROI Analyzer
-* 🏫 College Profile Page
+  <img width="1913" height="922" alt="image" src="https://github.com/user-attachments/assets/a706d2c0-0230-47ef-b6af-f9bce47d7a65" />
 
+* ⚖️ Comparison Table
+ <img width="1894" height="551" alt="image" src="https://github.com/user-attachments/assets/0469392a-7031-4026-8ad6-c8a4e1aa6c98" />
+
+* 🏫 College Profile Page
+  <img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/9f454bd5-1182-4631-aff4-3b01aa34cfef" />
+* Find Colleges
+  <img width="1912" height="542" alt="image" src="https://github.com/user-attachments/assets/e71a3a2b-4525-4201-8131-b270d2194a1b" />
+* 
 ---
 
 ## 💡 Future Improvements
