@@ -1,63 +1,128 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/collegeDB")
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
 const app = express();
-const collegeSchema = new mongoose.Schema({
-  name: String,
-  location: String,
-  fees: Number,
-  rating: Number,
-  courses: [String],
-  exams: [String],
-  placements: {
-    average: Number,
-    highest: Number
-  },
-  roi: Number,
-  cutoff: Object
-});
-
-const College = mongoose.model("College", collegeSchema);
-
 app.use(cors());
 app.use(express.json());
-app.get("/colleges", async (req, res) => {
-  try {
-    const colleges = await College.find();
-    res.json(colleges);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+
+// 🔥 Dummy Data
+const colleges = [
+{
+  name: "Delhi Technological University",
+  location: "Delhi",
+  fees: 120000,
+  rating: 4.5,
+
+  courses: ["B.Tech", "M.Tech"],
+  exams: ["JEE Main"],
+  cutoff: { jee: 10000 },
+
+  feesBreakdown: {
+    tuition: 90000,
+    hostel: 20000,
+    other: 10000
+  },
+
+  placements: {
+    average: 1000000,
+    highest: 3000000,
+    median: 900000
+  },
+
+  infrastructure: "Urban campus with excellent connectivity",
+  facultyQuality: "Highly reputed faculty",
+  accreditation: ["NAAC A+"]
+},
+
+{
+  name: "Jadavpur University",
+  location: "Kolkata",
+  fees: 20000,
+  rating: 4.6,
+
+  courses: ["B.E", "M.E"],
+  exams: ["WBJEE"],
+  cutoff: { wbjee: 500 },
+
+  feesBreakdown: {
+    tuition: 10000,
+    hostel: 5000,
+    other: 5000
+  },
+
+  placements: {
+    average: 800000,
+    highest: 2000000,
+    median: 700000
+  },
+
+  infrastructure: "Strong academic environment, research focus",
+  facultyQuality: "Highly research-oriented faculty",
+  accreditation: ["NAAC A"]
+},
+
+{
+  name: "Manipal Institute of Technology",
+  location: "Manipal",
+  fees: 300000,
+  rating: 4.4,
+
+  courses: ["B.Tech", "M.Tech"],
+  exams: ["MET"],
+  cutoff: { met: 7000 },
+
+  feesBreakdown: {
+    tuition: 250000,
+    hostel: 30000,
+    other: 20000
+  },
+
+  placements: {
+    average: 900000,
+    highest: 2500000,
+    median: 800000
+  },
+
+  infrastructure: "World-class campus and labs",
+  facultyQuality: "Industry-experienced faculty",
+  accreditation: ["NAAC A+"]
+},
+
+{
+  name: "Thapar Institute of Engineering",
+  location: "Patiala",
+  fees: 320000,
+  rating: 4.3,
+
+  courses: ["B.Tech", "M.Tech"],
+  exams: ["JEE Main"],
+  cutoff: { jee: 20000 },
+
+  feesBreakdown: {
+    tuition: 270000,
+    hostel: 30000,
+    other: 20000
+  },
+
+  placements: {
+    average: 1100000,
+    highest: 2800000,
+    median: 950000
+  },
+
+  infrastructure: "Modern campus with research labs",
+  facultyQuality: "Strong academic faculty",
+  accreditation: ["NAAC A+"]
+}
+];
+
+// API
+app.get("/colleges", (req, res) => {
+  res.json(colleges);
 });
-app.get("/colleges/filter", async (req, res) => {
-  try {
-    const { location, course } = req.query;
 
-    let query = {};
+const PORT = process.env.PORT || 5000;
 
-    if (location) query.location = location;
-    if (course) query.courses = course;
-
-    const colleges = await College.find(query);
-
-    res.json(colleges);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-app.post("/colleges", async (req, res) => {
-  try {
-    const newCollege = new College(req.body);
-    await newCollege.save();
-    res.json(newCollege);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
