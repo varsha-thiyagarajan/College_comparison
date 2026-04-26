@@ -1,11 +1,13 @@
 let selected = [];
 let allColleges = [];
+
 fetch("https://college-comparison.onrender.com/colleges")
   .then(res => res.json())
   .then(data => {
     allColleges = data;
     showColleges(data);
   });
+
 function showColleges(data, rank = null) {
   const container = document.getElementById("college-list");
   container.innerHTML = "";
@@ -20,10 +22,12 @@ function showColleges(data, rank = null) {
       else if (rank <= cutoff) category = "🟡 Match";
       else category = "🔴 Dream";
     }
-    const isSelected = selected.find(c => c._id === college._id);
+
+    const isSelected = selected.find(c => c.id === college.id);
 
     const div = document.createElement("div");
     div.className = "card";
+
     if (isSelected) {
       div.style.border = "2px solid green";
     }
@@ -40,25 +44,23 @@ function showColleges(data, rank = null) {
       <p>Rating: ⭐ ${college.rating}</p>
       <p>${category}</p>
 
-     <button onclick="selectCollege(${index})">
-  ${isSelected ? "Deselect" : "Select"}
-</button>
+      <button onclick="selectCollege(${index})">
+        ${isSelected ? "Deselect" : "Select"}
+      </button>
     `;
 
     container.appendChild(div);
   });
 }
+
 function selectCollege(index) {
   const college = allColleges[index];
 
-  const existsIndex = selected.findIndex(c => c._id === college._id);
+  const existsIndex = selected.findIndex(c => c.id === college.id);
 
-  // 🔁 If already selected → remove (DESELECT)
   if (existsIndex !== -1) {
     selected.splice(existsIndex, 1);
-  } 
-  // ➕ If not selected → add
-  else {
+  } else {
     if (selected.length < 3) {
       selected.push(college);
     } else {
@@ -66,10 +68,10 @@ function selectCollege(index) {
       return;
     }
   }
+
   showColleges(allColleges);
 }
 
-// 🔍 Smart search
 function searchColleges() {
   const course = document.getElementById("course").value;
   const location = document.getElementById("location").value;
@@ -86,6 +88,7 @@ function searchColleges() {
 
   showColleges(filtered, rank);
 }
+
 function compareColleges() {
   const container = document.getElementById("comparison");
 
@@ -143,9 +146,11 @@ function compareColleges() {
 
   container.innerHTML = table;
 }
+
 function viewCollege(index) {
   const college = allColleges[index];
   const container = document.getElementById("college-list");
+
   document.querySelector(".search-box").style.display = "none";
   document.querySelector("h1").style.display = "none";
   document.getElementById("comparison").innerHTML = "";
@@ -203,10 +208,10 @@ function viewCollege(index) {
 
 function goBack() {
   showColleges(allColleges);
-
   document.querySelector(".search-box").style.display = "flex";
   document.querySelector("h1").style.display = "block";
 }
+
 function predictColleges() {
   const rank = document.getElementById("predict-rank").value;
   const container = document.getElementById("prediction-result");
