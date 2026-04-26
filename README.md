@@ -3,6 +3,9 @@
 A smart web platform that helps students compare colleges and make better admission decisions using data-driven insights like fees, placements, ROI, and personalized recommendations.
 
 ---
+## 🌐 Live Demo
+
+https://college-compare-app.netlify.app
 
 ## 🚀 Problem Statement
 
